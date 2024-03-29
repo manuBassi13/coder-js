@@ -1,0 +1,109 @@
+
+body{
+    background-color: #e7e7e7 !important;
+}
+
+div#categorias button{
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    opacity: 80%;
+    width: 3.5em;
+    height: 2.5em;
+}
+div#categorias button:hover{
+    opacity: 50%;
+}
+
+div#categorias h3{
+    font-size: 16px
+}
+
+div.gasto{
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+}
+div.gasto h3{
+    font-size: 20px;
+}
+div.gasto p{
+    margin-bottom:5px;
+}
+
+p.valorUS, p.valorAR{
+    display: inline;
+}
+
+.boton-eliminar{
+    cursor: pointer;
+}
+
+#data-gastos{
+    display: none;
+}
+
+div#div-grafico{
+    display: none;
+}
+
+#cerrarPopup{
+    cursor: pointer;
+}
+
+.text-red{
+    color: red;
+}
+
+
+
+/* Fondo modal: negro con opacidad al 50% */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding: 275px 200px 0px; 
+    left:0;
+    top: 0;
+    width: 10%; /* Ancho completo */
+    height: 100%; /* Algura completa */
+    overflow: auto; /* Se activará el scroll si es necesario */
+    background-color: rgba(0, 0, 0, 0.6); /* Color negro con opacidad del 50% */
+  }
+
+  .modal-content {
+    position: relative; /* Relativo con respecto al contenedor -modal- */
+    background-color: white;
+    margin: auto; /* Centrada */
+    padding: 20px !important;
+    width: 60%;
+    -webkit-animation-name: animarsuperior;
+    -webkit-animation-duration: 0.7s !important;
+    animation-name: animarsuperior;
+    animation-duration: 0.7s !important;
+  }
+
+  /* Add Animation */
+
+@-webkit-keyframes animarsuperior {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+@keyframes animarsuperior {
+from {top:-300px; opacity:0}
+to {top:0; opacity:1}
+}
+
+  .close {
+    color: black;
+    float: right !important;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
