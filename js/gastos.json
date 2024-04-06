@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "id": 0,
         "categoria": "SUPERMERCADO",
         "descripcion": "Verdulería y carnicería",
         "valor": 15000,
@@ -8,7 +8,7 @@
         "fecha": "2024-03-25"
     },
     {
-        "id": 2,
+        "id": 1,
         "categoria": "OCIO",
         "descripcion": "Cine",
         "valor": 5000,
@@ -16,7 +16,7 @@
         "fecha": "2024-03-26"
     },
     {
-        "id": 3,
+        "id": 2,
         "categoria": "SALUD",
         "descripcion": "Farmacia",
         "valor": 5500,
@@ -24,7 +24,7 @@
         "fecha": "2024-03-26"
     },
     {
-        "id": 4,
+        "id": 3,
         "categoria": "TRANSPORTE",
         "descripcion": "Nafta",
         "valor": 18500,
@@ -32,7 +32,7 @@
         "fecha": "2024-03-26"
     },
     {
-        "id": 5,
+        "id": 4,
         "categoria": "SALIDAS",
         "descripcion": "Bar",
         "valor": 8500,
@@ -40,7 +40,7 @@
         "fecha": "2024-03-27"
     },
     {
-        "id": 6,
+        "id": 5,
         "categoria": "DEPORTE",
         "descripcion": "Futbol 5",
         "valor": 2500,

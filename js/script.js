@@ -1,23 +1,10 @@
-//Lista de categorías
-const categorias = [
-    {id: 1, nombre: "DEPORTES", icono: "fa-futbol", color: "green"},
-    {id: 2, nombre: "OCIO", icono: "fa-martini-glass-citrus", color: "black"},
-    {id: 3, nombre: "IMPUESTOS", icono: "fa-file-invoice-dollar", color: "blue"},
-    {id: 4, nombre: "MASCOTAS", icono: "fa-dog", color: "brown"},
-    {id: 5, nombre: "REGALOS", icono: "fa-gift", color: "orange"},
-    {id: 6, nombre: "ROPA", icono: "fa-shirt", color: "yellowgreen"},
-    {id: 7, nombre: "SALIDAS", icono: "fa-utensils", color: "burlywood"},
-    {id: 8, nombre: "SALUD", icono: "fa-heart", color: "red"},
-    {id: 9, nombre: "SUPERMERCADO", icono: "fa-cart-shopping", color: "violet"},
-    {id: 10, nombre: "TRANSPORTE", icono: "fa-car", color: "darkcyan"},
-    {id: 11, nombre: "VIAJES", icono: "fa-plane", color: "purple"},
-    {id: 12, nombre: "VIVIENDA", icono: "fa-house", color: "grey"}
-];
 
 let lista_gastos = [];
+let categorias = [];
 var DateTime = luxon.DateTime;
 let errorContenido = ``;
 let miGrafico = "";
+let idGasto = 0;
 
 //Importacion
 const contenedorCategorias = document.getElementById("categorias");
@@ -29,11 +16,17 @@ const btnExportarExcel = document.getElementById("exportarExcel");
 const divGrafico = document.getElementById("div-grafico")
 const canvasGrafico = document.getElementById('graf-gastos');
 
+fetch("js/categorias.json")
+.then(response => response.json())
+.then(data => {
+    categorias = data;
+    renderizarCategorias(categorias);
+})
 
 //Renderizar categorias
-function renderizarCategorias(){
+function renderizarCategorias(categoriasJson){
     contenedorCategorias.innerHTML = "";
-    categorias.forEach(categoria => {
+    categoriasJson.forEach(categoria => {
         const div = document.createElement("div");
         div.classList.add("col");
         div.innerHTML = `
@@ -44,7 +37,7 @@ function renderizarCategorias(){
     })
 }
 
-/* //Traer lista de gastos JSON
+//Traer lista de gastos JSON
 fetch("js/gastos.json")
 .then(response => response.json())
 .then(data => {
@@ -53,7 +46,7 @@ fetch("js/gastos.json")
     activarBtnEliminar();
     actualizarLocalStorage();
 })
- */
+
 
 //Renderizar lista de gastos
 function renderizarGastos(gastosJson){
@@ -134,7 +127,7 @@ function popupGasto(id){
     const fecha = document.getElementById("fechaGasto");
     const botonCargaGasto = document.getElementById("cargarGasto");
     const botonCerrar = document.getElementById("cerrarPopup");
-
+    
     //Boton Cargar Nuevo Gasto
     botonCargaGasto.addEventListener('click', () => {
         cargaGasto(categoria, descripcion, monto, fecha);
@@ -148,8 +141,11 @@ function popupGasto(id){
 
 //Cargar Nuevo Gasto
 function cargaGasto(categoria, descripcion, monto, fecha){
+    if (lista_gastos.length > 0) {
+        idGasto = lista_gastos[lista_gastos.length-1].id + 1
+    }
     const nuevoGasto = {
-        id: lista_gastos.length+1,
+        id: idGasto,
         categoria: categoria,
         descripcion: descripcion.value,
         valor: monto.value,
@@ -177,7 +173,6 @@ function limpiarDataGasto(){
 
 //Eliminar Gasto ------------------- REVISAR
 function eliminarGasto(id){
-    console.log(lista_gastos);
     const i = lista_gastos.findIndex((gasto) => gasto.id === parseInt(id))
     lista_gastos.splice(i, 1);
     renderizarGastos(lista_gastos);
@@ -202,8 +197,6 @@ btnExportarExcel.addEventListener("click", () => {
     contenedorError.innerHTML="";
     errorContenido = `<h3 class="text-red">Error al exportar.</h3>`;
     try{
-        console.log("Hola")
-        console.log(lista_gastos)
         const worksheet = XLSX.utils.json_to_sheet(lista_gastos);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Gastos");
@@ -229,10 +222,8 @@ const convertirAusd = async () => {
         const USDBlueVenta = respuesta.venta;
         actualizarValores(USDBlueVenta);
         renderizarGastos(lista_gastos);
-        activarBtnEliminar();
-        
+        activarBtnEliminar();  
     } catch(err) {
-        console.log("Se ha producido un error");
         contenedorError.innerHTML = errorContenido;
     }
 }
@@ -244,12 +235,10 @@ function actualizarValores(USDBlue){
     });
 }
 
-
 //Gráfico
 const mostrarGrafico = (lista) => {
     if (lista.length === 0) divGrafico.style.display = "none";
     else divGrafico.style.display = "block";
-    console.log(lista)
     miGrafico = new Chart(
         canvasGrafico,
         {
@@ -268,41 +257,13 @@ const mostrarGrafico = (lista) => {
 };
 mostrarGrafico(lista_gastos);
 
-// Actualizar el local storage
-const actualizarLocalStorage = () => {
-    localStorage.setItem('lista_gastos', JSON.stringify(lista_gastos));
-};
-
-// Cargar gastos desde el local storage
-const traerLocalStorage = () => {
-lista_gastos = JSON.parse(localStorage.getItem('lista_gastos')) || [];
-};
-
 //Al cargar página
 window.onload = () => {
     traerLocalStorage();
-    renderizarCategorias();
+    renderizarCategorias(categorias);
     renderizarGastos(lista_gastos);
     activarBtnEliminar();
     miGrafico.destroy();
     mostrarGrafico(lista_gastos);
 };
-
-
-
-/* 
-// Cuando el usuario hace clic en el botón, se abre la ventana
-boton.addEventListener("click", () => {
-    modal.style.display = "block";
-  });
-  // Si el usuario hace clic en la x, la ventana se cierra
-  span.addEventListener("click", () => {
-    modal.style.display = "none";
-  });
-  // Si el usuario hace clic fuera de la ventana, se cierra.
-  window.addEventListener("click", (event) => {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }); */
 
