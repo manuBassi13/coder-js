@@ -1,0 +1,64 @@
+[
+    {
+        "id": 1, 
+        "nombre": "DEPORTES", 
+        "icono": "fa-futbol", 
+        "color": "green"
+    },
+    {
+        "id": 2, 
+        "nombre": "OCIO", 
+        "icono": "fa-martini-glass-citrus", 
+        "color": "black"},
+    {
+        "id": 3, 
+        "nombre": "IMPUESTOS", 
+        "icono": "fa-file-invoice-dollar", 
+        "color": "blue"},
+    {
+        "id": 4, 
+        "nombre": "MASCOTAS", 
+        "icono": "fa-dog", 
+        "color": "brown"},
+    {
+        "id": 5, 
+        "nombre": "REGALOS", 
+        "icono": "fa-gift", 
+        "color": "orange"},
+    {
+        "id": 6, 
+        "nombre": "ROPA", 
+        "icono": "fa-shirt", 
+        "color": "yellowgreen"},
+    {
+        "id": 7, 
+        "nombre": "SALIDAS", 
+        "icono": "fa-utensils", 
+        "color": "burlywood"},
+    {
+        "id": 8, 
+        "nombre": "SALUD", 
+        "icono": "fa-heart", 
+        "color": "red"},
+    {
+        "id": 9, 
+        "nombre": "SUPERMERCADO", 
+        "icono": "fa-cart-shopping", 
+        "color": "violet"},
+    {
+        "id": 10, 
+        "nombre": "TRANSPORTE", 
+        "icono": "fa-car", 
+        "color": "darkcyan"},
+    {
+        "id": 11, 
+        "nombre": "VIAJES", 
+        "icono": "fa-plane", 
+        "color": "purple"},
+    {
+        "id": 12, 
+        "nombre": "VIVIENDA", 
+        "icono": "fa-house", 
+        "color": "grey"
+    }
+]
